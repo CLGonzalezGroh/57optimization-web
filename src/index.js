@@ -2,7 +2,7 @@ import h from 'hyperscript'
 import { fetchPopular, fetchHighestRated, fetchTrending } from './api'
 import CarouselItem from './CarouselItem'
 
-const SectionTitle = title => h('h3.carousel-title', title)
+const SectionTitle = (title) => h('h3.carousel-title', title)
 
 const Carousel = ({ itemsList = [] }) =>
   h(
@@ -25,7 +25,7 @@ const Carousel = ({ itemsList = [] }) =>
     )
   )
 
-window.addEventListener('DOMContentLoaded', async () => {
+!(async function (document) {
   const mountReference = document.querySelector('.main').lastElementChild
 
   if (!mountReference) {
@@ -58,4 +58,4 @@ window.addEventListener('DOMContentLoaded', async () => {
         itemsList: popular,
       })
     )
-})
+})(document, window)
