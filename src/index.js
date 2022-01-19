@@ -1,6 +1,8 @@
+import lozad from 'lozad'
 import h from 'hyperscript'
 import { fetchPopular, fetchHighestRated, fetchTrending } from './api'
 import CarouselItem from './CarouselItem'
+import { modalListener } from './modal'
 
 const SectionTitle = (title) => h('h3.carousel-title', title)
 
@@ -58,4 +60,15 @@ const Carousel = ({ itemsList = [] }) =>
         itemsList: popular,
       })
     )
+
+  // Add lazy loading
+  const carouseImages = document.querySelectorAll('.carousel-item__img')
+  const observer = lozad(carouseImages)
+  observer.observe()
+
+  const allYouTubeLinks = document.querySelectorAll('.js-video-link')
+  // console.log(allYouTubeLinks);
+  allYouTubeLinks.forEach((link) => {
+    link.addEventListener('click', modalListener)
+  })
 })(document, window)
